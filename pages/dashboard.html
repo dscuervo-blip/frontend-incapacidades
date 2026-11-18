@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel | Incapacidades Médicas</title>
+    <title>Inicio | Incapacidades Médicas</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
-    <header class="barra">
-        <span class="marca">Corporate Solutions</span>
-        <div class="barra__usuario">
-            <span id="usuario-nombre"></span>
-            <span id="usuario-rol" class="etiqueta"></span>
-            <button type="button" id="btn-salir" class="boton boton--secundario">Cerrar sesión</button>
-        </div>
-    </header>
+<body class="app">
+    <header id="app-barra"></header>
+    <nav id="app-menu"></nav>
 
-    <main class="contenedor">
+    <main class="app__contenido">
         <div id="mensaje" class="mensaje" role="alert" hidden></div>
-        <section class="tarjeta">
+
+        <section class="encabezado-pagina">
             <h1 id="saludo">Bienvenido</h1>
-            <p>Desde aquí podrás gestionar empleados, incapacidades y su seguimiento.</p>
+            <p>Gestiona empleados, incapacidades médicas y su seguimiento administrativo.</p>
+        </section>
+
+        <section class="grid-modulos" id="accesos" aria-label="Accesos a los módulos"></section>
+
+        <section class="tarjeta">
+            <h2>Estado de los servicios</h2>
+            <p>Cada microservicio valida tu token de sesión de forma independiente.</p>
+            <ul class="estado-servicios" id="estado-servicios"></ul>
         </section>
     </main>
 
@@ -28,6 +31,7 @@
     <script src="../js/sesion.js"></script>
     <script src="../js/api.js"></script>
     <script src="../js/ui.js"></script>
+    <script src="../js/layout.js"></script>
     <script src="../js/dashboard.js"></script>
 </body>
 </html>

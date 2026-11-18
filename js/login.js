@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputContrasena = document.getElementById('contrasena');
     const boton = document.getElementById('btn-ingresar');
 
+    // Aviso dejado por otra página (por ejemplo, sesión expirada).
+    const aviso = Sesion.tomarAviso();
+    if (aviso) mostrarMensaje('error', aviso);
+
     form.addEventListener('submit', async (evento) => {
         evento.preventDefault();
         ocultarMensaje();

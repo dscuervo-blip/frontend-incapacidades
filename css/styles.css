@@ -156,4 +156,137 @@ h1 { font-size: 1.5rem; margin-bottom: 6px; }
     padding: 24px;
 }
 
+.tarjeta h2 { font-size: 1.1rem; margin-bottom: 4px; }
 .tarjeta p { color: var(--color-texto-suave); }
+
+/* ---------- Estructura de la aplicación ---------- */
+.app {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "barra barra"
+        "menu  contenido";
+    min-height: 100vh;
+}
+
+.app .barra { grid-area: barra; position: sticky; top: 0; z-index: 10; }
+
+.barra__menu {
+    display: none;
+    background: none;
+    border: 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--color-texto);
+}
+
+.menu {
+    grid-area: menu;
+    background: var(--color-superficie);
+    border-right: 1px solid var(--color-borde);
+    padding: 16px 12px;
+}
+
+.menu ul { list-style: none; display: grid; gap: 4px; }
+
+.menu__enlace {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radio);
+    color: var(--color-texto);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.menu__enlace:hover { background: var(--color-fondo); }
+
+.menu__enlace--activo,
+.menu__enlace--activo:hover {
+    background: #e3eef0;
+    color: var(--color-primario-oscuro);
+    font-weight: 700;
+}
+
+.menu__icono { width: 1.4em; text-align: center; }
+
+.app__contenido {
+    grid-area: contenido;
+    padding: 28px;
+    display: grid;
+    gap: 20px;
+    align-content: start;
+    max-width: 1100px;
+    width: 100%;
+}
+
+.encabezado-pagina p { color: var(--color-texto-suave); }
+
+/* ---------- Panel principal ---------- */
+.grid-modulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.tarjeta--enlace {
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: border-color 0.15s, transform 0.15s;
+}
+
+.tarjeta--enlace:hover { border-color: var(--color-primario); transform: translateY(-2px); }
+.tarjeta__icono { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+
+.estado-servicios { list-style: none; margin-top: 12px; display: grid; gap: 8px; }
+
+.estado-servicios__item {
+    display: grid;
+    grid-template-columns: auto 140px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--color-fondo);
+    border-radius: var(--radio);
+}
+
+.estado-servicios__nombre { font-weight: 600; }
+.estado-servicios__texto { color: var(--color-texto-suave); font-size: 0.9rem; }
+
+.punto { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.punto--pendiente { background: #b8c4cc; }
+.punto--ok { background: var(--color-exito); }
+.punto--error { background: var(--color-error); }
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 760px) {
+    .app {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "barra"
+            "contenido";
+    }
+
+    .barra { padding: 12px 16px; }
+    .barra__menu { display: block; }
+    .barra__nombre { display: none; }
+
+    .menu {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        bottom: 0;
+        width: 240px;
+        z-index: 9;
+        box-shadow: var(--sombra);
+    }
+
+    .menu-abierto .menu { display: block; }
+    .app__contenido { padding: 20px 16px; }
+    .estado-servicios__item { grid-template-columns: auto 1fr; }
+    .estado-servicios__texto { grid-column: 2; }
+}
