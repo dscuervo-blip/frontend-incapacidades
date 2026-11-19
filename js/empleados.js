@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (evento) => evento.preventDefault());
 
     prepararDialogo(document.getElementById('dialogo-detalle'));
+    FormularioEmpleado.iniciar(() => {
+        cargarAreas();
+        cargarEmpleados();
+    });
+    document.getElementById('btn-nuevo').addEventListener('click', () => FormularioEmpleado.abrir());
 
     cargarAreas();
     cargarEmpleados();
@@ -40,12 +45,27 @@ function leerFiltros() {
 async function cargarAreas() {
     try {
         const respuesta = await apiRequest('empleados', '/empleados/areas');
+
+        // Filtro de área (conserva la opción elegida).
         const select = document.getElementById('filtro-area');
-        respuesta.data.forEach((area) => {
+        const elegida = select.value;
+        const todas = crearElemento('option', '', 'Todas');
+        todas.value = '';
+        const opciones = respuesta.data.map((area) => {
             const opcion = crearElemento('option', '', area);
             opcion.value = area;
-            select.appendChild(opcion);
+            return opcion;
         });
+        select.replaceChildren(todas, ...opciones);
+        select.value = respuesta.data.includes(elegida) ? elegida : '';
+
+        // Sugerencias del campo área en el formulario.
+        const sugerencias = respuesta.data.map((area) => {
+            const opcion = document.createElement('option');
+            opcion.value = area;
+            return opcion;
+        });
+        document.getElementById('lista-areas').replaceChildren(...sugerencias);
     } catch (error) {
         console.warn('No se pudieron cargar las áreas:', error.message);
     }
@@ -106,7 +126,13 @@ function crearFilaEmpleado(empleado) {
     botonVer.type = 'button';
     botonVer.setAttribute('aria-label', `Ver detalle de ${empleado.nombres} ${empleado.apellidos}`);
     botonVer.addEventListener('click', () => verDetalle(empleado.id));
-    celdaAcciones.appendChild(botonVer);
+
+    const botonEditar = crearElemento('button', 'boton boton--secundario boton--pequeno', 'Editar');
+    botonEditar.type = 'button';
+    botonEditar.setAttribute('aria-label', `Editar a ${empleado.nombres} ${empleado.apellidos}`);
+    botonEditar.addEventListener('click', () => FormularioEmpleado.abrir(empleado));
+
+    celdaAcciones.append(botonVer, ' ', botonEditar);
 
     fila.append(
         celdaNombre,

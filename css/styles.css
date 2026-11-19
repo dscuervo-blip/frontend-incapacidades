@@ -380,8 +380,37 @@ h1 { font-size: 1.5rem; margin-bottom: 6px; }
     white-space: nowrap;
 }
 
+/* ---------- Formularios en diálogo ---------- */
+.encabezado-pagina--con-accion {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.dialogo--ancho { width: min(720px, calc(100% - 32px)); }
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+}
+
+.formulario .campo { margin-bottom: 12px; }
+
+.formulario__acciones {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
 /* ---------- Pantallas pequeñas ---------- */
 @media (max-width: 760px) {
+    .formulario { grid-template-columns: minmax(0, 1fr); }
+    .encabezado-pagina--con-accion .boton { width: 100%; }
     .detalle { grid-template-columns: 1fr; gap: 2px; }
     .detalle dd { margin-bottom: 8px; }
 

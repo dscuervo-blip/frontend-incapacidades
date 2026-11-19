@@ -13,9 +13,12 @@
     <main class="app__contenido">
         <div id="mensaje" class="mensaje" role="alert" hidden></div>
 
-        <section class="encabezado-pagina">
-            <h1>Empleados</h1>
-            <p>Registra, edita y consulta la información de los empleados.</p>
+        <section class="encabezado-pagina encabezado-pagina--con-accion">
+            <div>
+                <h1>Empleados</h1>
+                <p>Registra, edita y consulta la información de los empleados.</p>
+            </div>
+            <button type="button" id="btn-nuevo" class="boton boton--primario">+ Nuevo empleado</button>
         </section>
 
         <section class="tarjeta">
@@ -81,11 +84,78 @@
         <dl id="detalle-contenido" class="detalle"></dl>
     </dialog>
 
+    <dialog id="dialogo-formulario" class="dialogo dialogo--ancho" aria-labelledby="formulario-titulo">
+        <div class="dialogo__cabecera">
+            <h2 id="formulario-titulo">Nuevo empleado</h2>
+            <button type="button" class="dialogo__cerrar" data-cerrar aria-label="Cerrar">✕</button>
+        </div>
+
+        <div id="formulario-mensaje" class="mensaje" role="alert" hidden></div>
+
+        <form id="form-empleado" class="formulario" novalidate>
+            <div class="campo">
+                <label for="emp-nombres">Nombres *</label>
+                <input type="text" id="emp-nombres" name="nombres" maxlength="100" required autocomplete="off">
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-apellidos">Apellidos *</label>
+                <input type="text" id="emp-apellidos" name="apellidos" maxlength="100" required autocomplete="off">
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-documento">Documento de identificación *</label>
+                <input type="text" id="emp-documento" name="documento" maxlength="30" inputmode="numeric" required autocomplete="off">
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-correo">Correo electrónico *</label>
+                <input type="email" id="emp-correo" name="correo" maxlength="150" required autocomplete="off">
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-telefono">Teléfono *</label>
+                <input type="tel" id="emp-telefono" name="telefono" maxlength="30" required autocomplete="off">
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-fecha">Fecha de ingreso *</label>
+                <input type="date" id="emp-fecha" name="fecha_ingreso" required>
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-cargo">Cargo *</label>
+                <input type="text" id="emp-cargo" name="cargo" maxlength="100" required autocomplete="off">
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo">
+                <label for="emp-area">Área *</label>
+                <input type="text" id="emp-area" name="area" maxlength="100" list="lista-areas" required autocomplete="off">
+                <datalist id="lista-areas"></datalist>
+                <small class="campo__error"></small>
+            </div>
+            <div class="campo" id="campo-estado" hidden>
+                <label for="emp-estado">Estado</label>
+                <select id="emp-estado" name="estado">
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+                <small class="campo__error"></small>
+            </div>
+
+            <div class="formulario__acciones">
+                <button type="button" class="boton boton--secundario" data-cerrar>Cancelar</button>
+                <button type="submit" class="boton boton--primario" id="btn-guardar">Guardar</button>
+            </div>
+        </form>
+    </dialog>
+
     <script src="../js/config.js"></script>
     <script src="../js/sesion.js"></script>
     <script src="../js/api.js"></script>
     <script src="../js/ui.js"></script>
     <script src="../js/layout.js"></script>
+    <script src="../js/empleado-form.js"></script>
     <script src="../js/empleados.js"></script>
 </body>
 </html>
