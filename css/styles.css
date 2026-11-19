@@ -162,7 +162,7 @@ h1 { font-size: 1.5rem; margin-bottom: 6px; }
 /* ---------- Estructura de la aplicación ---------- */
 .app {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 220px minmax(0, 1fr);
     grid-template-rows: auto 1fr;
     grid-template-areas:
         "barra barra"
@@ -216,10 +216,12 @@ h1 { font-size: 1.5rem; margin-bottom: 6px; }
     grid-area: contenido;
     padding: 28px;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 20px;
     align-content: start;
     max-width: 1100px;
     width: 100%;
+    min-width: 0;
 }
 
 .encabezado-pagina p { color: var(--color-texto-suave); }
@@ -261,10 +263,130 @@ h1 { font-size: 1.5rem; margin-bottom: 6px; }
 .punto--ok { background: var(--color-exito); }
 .punto--error { background: var(--color-error); }
 
+/* ---------- Filtros ---------- */
+.filtros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0 16px;
+    align-items: end;
+}
+
+.filtros .campo { margin-bottom: 0; }
+.filtros__acciones { padding-bottom: 1px; }
+.filtros__acciones .boton { width: 100%; }
+
+/* ---------- Tablas ---------- */
+.tabla__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+.tabla__total { color: var(--color-texto-suave); font-size: 0.9rem; }
+.tabla__contenedor { overflow-x: auto; }
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.tabla th {
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-texto-suave);
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--color-borde);
+    white-space: nowrap;
+}
+
+.tabla td {
+    padding: 12px;
+    border-bottom: 1px solid var(--color-borde);
+    vertical-align: middle;
+}
+
+.tabla tbody tr:hover { background: #f7fafb; }
+.tabla__principal { display: block; }
+.tabla__secundario { display: block; color: var(--color-texto-suave); font-size: 0.85rem; }
+.tabla__acciones { text-align: right; white-space: nowrap; }
+.tabla__vacio { text-align: center; color: var(--color-texto-suave); padding: 32px 12px; }
+.tabla__vacio--error { color: var(--color-error); }
+
+.boton--pequeno { padding: 6px 12px; font-size: 0.85rem; }
+
+/* ---------- Insignias de estado ---------- */
+.insignia {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.insignia--activo     { background: var(--color-exito-fondo); color: var(--color-exito); }
+.insignia--inactivo   { background: #eceff1; color: #546e7a; }
+
+/* ---------- Diálogos ---------- */
+.dialogo {
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(16, 42, 56, 0.25);
+    padding: 24px;
+    width: min(520px, calc(100% - 32px));
+    margin: auto;
+}
+
+.dialogo::backdrop { background: rgba(16, 42, 56, 0.45); }
+
+.dialogo__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.dialogo__cerrar {
+    background: none;
+    border: 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--color-texto-suave);
+    padding: 4px 8px;
+    border-radius: var(--radio);
+}
+
+.dialogo__cerrar:hover { background: var(--color-fondo); }
+
+.detalle {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 10px 16px;
+}
+
+.detalle dt { color: var(--color-texto-suave); font-size: 0.9rem; }
+.detalle dd { font-weight: 500; overflow-wrap: anywhere; }
+
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
 /* ---------- Pantallas pequeñas ---------- */
 @media (max-width: 760px) {
+    .detalle { grid-template-columns: 1fr; gap: 2px; }
+    .detalle dd { margin-bottom: 8px; }
+
     .app {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             "barra"
             "contenido";

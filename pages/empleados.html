@@ -18,16 +18,74 @@
             <p>Registra, edita y consulta la información de los empleados.</p>
         </section>
 
-        <section class="tarjeta" id="contenido-modulo">
-            <p>Este módulo está en desarrollo.</p>
+        <section class="tarjeta">
+            <form id="form-filtros" class="filtros" novalidate>
+                <div class="campo">
+                    <label for="filtro-buscar">Nombre, correo o cargo</label>
+                    <input type="search" id="filtro-buscar" name="buscar" placeholder="Ej. Laura">
+                </div>
+                <div class="campo">
+                    <label for="filtro-documento">Documento</label>
+                    <input type="search" id="filtro-documento" name="documento" inputmode="numeric" placeholder="Ej. 1000123456">
+                </div>
+                <div class="campo">
+                    <label for="filtro-area">Área</label>
+                    <select id="filtro-area" name="area">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="filtro-estado">Estado</label>
+                    <select id="filtro-estado" name="estado">
+                        <option value="">Todos</option>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <div class="filtros__acciones">
+                    <button type="reset" class="boton boton--secundario">Limpiar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="tarjeta">
+            <div class="tabla__cabecera">
+                <h2>Listado</h2>
+                <span id="total-empleados" class="tabla__total"></span>
+            </div>
+
+            <div class="tabla__contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th scope="col">Empleado</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Área</th>
+                            <th scope="col">Ingreso</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col"><span class="visualmente-oculto">Acciones</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-empleados"></tbody>
+                </table>
+            </div>
         </section>
     </main>
+
+    <dialog id="dialogo-detalle" class="dialogo" aria-labelledby="detalle-titulo">
+        <div class="dialogo__cabecera">
+            <h2 id="detalle-titulo">Detalle del empleado</h2>
+            <button type="button" class="dialogo__cerrar" data-cerrar aria-label="Cerrar">✕</button>
+        </div>
+        <dl id="detalle-contenido" class="detalle"></dl>
+    </dialog>
 
     <script src="../js/config.js"></script>
     <script src="../js/sesion.js"></script>
     <script src="../js/api.js"></script>
     <script src="../js/ui.js"></script>
     <script src="../js/layout.js"></script>
-    <script src="../js/pagina.js"></script>
+    <script src="../js/empleados.js"></script>
 </body>
 </html>
